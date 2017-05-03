@@ -26,7 +26,7 @@ $('#menu-nav a').click(function(e){
     $("#menu-nav a[href='" + window.location.pathname + "']").css('color','green');
     $("#menu-nav a[href='" + window.location.pathname + "'] span").html(" ");
 
-    //pushing the URL into browser history
+    //pushing the URL+data into browser history
     window.history.pushState({url: "" + targetUrl + ""}, targetTitle, targetUrl);
 
     console.log("PUSHED pathname2: " + window.location.pathname);
@@ -48,7 +48,7 @@ window.onpopstate = function(e) {
     }else {
       console.log("NO MORE PAGE TO POP");
     }
-
+    //set the current page with data from history popstate
     setCurrentPage(e.state ? e.state.url : null);
 };
 
