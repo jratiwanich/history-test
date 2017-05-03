@@ -30,7 +30,7 @@ $('#menu-nav a').click(function(e){
     window.history.pushState({url: "" + targetUrl + ""}, targetTitle, targetUrl);
 
     console.log("PUSHED pathname2: " + window.location.pathname);
-    console.log("PUSHED to targetURL: "+ targetUrl + ", targetTitle: "+targetTitle);
+    console.log("PUSHSTATE to targetURL: "+ targetUrl + ", targetTitle: "+targetTitle);
     setCurrentPage(targetUrl);
 });
 
@@ -44,12 +44,15 @@ window.onpopstate = function(e) {
 
     //If the history exists, we pop the URL
     if(e.state){
-      console.log("POP to URL:" + e.state.url);
+      console.log("ONPOPSTATE :" + e.state.url);
+      //set the current page with data from history popstate
+      setCurrentPage(e.state ? e.state.url : null);
     }else {
       console.log("NO MORE PAGE TO POP");
+      console.error(e);
+      setCurrentPage(document.location? document.location.href : null);
     }
-    //set the current page with data from history popstate
-    setCurrentPage(e.state ? e.state.url : null);
+
 };
 
 });
